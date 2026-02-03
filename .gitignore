@@ -8,3 +8,8 @@ __pycache__/
 .vscode/
 .idea/
 venv/
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*

@@ -71,8 +71,8 @@ resource "aws_security_group" "app_sg" {
 # 2. EC2 INSTANCE (Virtual Server)
 # ============================================
 resource "aws_instance" "app_server" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2
-  instance_type = "t2.micro"               # Free tier eligible
+  ami           = "ami-0c02fb55956c7d316"  # Amazon Linux 2 (us-east-1)
+  instance_type = "t3.micro"               # Free tier eligible
 
   # Use security group we created
   vpc_security_group_ids = [aws_security_group.app_sg.id]
@@ -97,22 +97,4 @@ resource "aws_eip" "app_eip" {
   }
 
   depends_on = [aws_instance.app_server]
-}
-
-# ============================================
-# OUTPUTS - Print results after creation
-# ============================================
-output "server_public_ip" {
-  description = "Public IP of the server"
-  value       = aws_eip.app_eip.public_ip
-}
-
-output "ssh_command" {
-  description = "How to SSH into your server"
-  value       = "ssh -i your-key.pem ec2-user@${aws_eip.app_eip.public_ip}"
-}
-
-output "app_url" {
-  description = "URL to access your app"
-  value       = "http://${aws_eip.app_eip.public_ip}"
 }

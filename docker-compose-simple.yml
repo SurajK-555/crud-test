@@ -1,6 +1,4 @@
 # Simple Docker Compose - Run both frontend and backend
-version: '3.8'
-
 services:
   # Backend service
   backend:
